@@ -73,10 +73,15 @@ const users = async (req, res) => {
     }
 
     const users = await User.findAll();
+
+    const filteredData = users.map(({ id, username, createdAt }) => {
+      return { id, username, createdAt };
+    });
+    
     return res.status(200).json({
       success: true,
       message: "Successfully fetched all data",
-      users: users,
+      users: filteredData,
       error: {},
     });
   } catch (error) {
