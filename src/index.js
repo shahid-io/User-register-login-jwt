@@ -1,16 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const authRoutes = require("./routes/authRoutes");
-
+const apiRoutes = require("./routes");
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
 
-// Use the router from authRoutes.js
-app.use("/auth", authRoutes);
+app.use("/api", apiRoutes);
 
-// Other middleware and routes
 
 const PORT = process.env.PORT || 3000;
 
