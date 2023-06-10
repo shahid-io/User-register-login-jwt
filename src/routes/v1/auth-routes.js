@@ -15,4 +15,12 @@ router.post("/register", UserController.register);
  */
 router.post("/login", UserController.login);
 
+
+/**
+ * Login route
+ * /api/v1/auth/users
+ */
+router.get("/users", UserController.users);
+
+
 module.exports = router;

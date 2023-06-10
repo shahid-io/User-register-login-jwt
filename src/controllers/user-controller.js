@@ -1,4 +1,3 @@
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
@@ -29,21 +28,27 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Find the user in the database
+    /**
+     *Find the user in the database
+     */
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Compare the password with the hashed password
+    /**
+     *Compare the password with the hashed password
+     */
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Generate JWT token
+    /**
+     *Generate JWT token
+     */
     const token = jwt.sign({ userId: user.id }, "your_secret_key");
 
     res.json({ message: "Login successful", token });
@@ -55,7 +60,37 @@ const login = async (req, res) => {
   }
 };
 
+const users = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    const users = await User.findAll();
+    return res.status(200).json({
+      success: true,
+      message: "Successfully fetched all data",
+      users: users,
+      error: {},
+    });
+  } catch (error) {
+    return res.status(200).json({
+      success: true,
+      message: "Failed fetch data",
+      users: {},
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
+  users,
 };
