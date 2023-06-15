@@ -37,3 +37,26 @@ Send email notifications to users for important events, such as account registra
 ### Deployment:
 
 Prepare your application for deployment to a production environment. Set up a hosting platform, configure environment variables, and optimize your application for performance and security.
+
+
+```
+<!-- //bad code alert
+// const { body, query, validationResult } = require("express-validator");
+// app.get("/hello", body("person").notEmpty(), (req, res) => {
+//   const result = validationResult(req);
+//   if (result.isEmpty()) {
+//     return res.send(`Hello ${req.body.person}!`);
+//   }
+//   res.send({ errors: result.array() });
+// });
+/**
+ * trim() will remove whitespace before of our query param
+ */
+// app.get("/p", query("person").notEmpty().trim(), (req, res) => {
+//   const result = validationResult(req);
+//   if (result.isEmpty()) {
+//     return res.send(`Hello ${req.query.person}!`);
+//   }
+//   res.send({ errors: result.array() });
+// }); -->
+``

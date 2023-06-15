@@ -4,23 +4,22 @@ const { UserController } = require("../../controllers");
 const router = express.Router();
 
 /**
- * Registration route
- * /api/v1/auth/register
+ * Signup route
+ * /api/v1/auth/sinup
  */
-router.post("/register", UserController.register);
+console.log("user-routes");
+router.post("/signup", UserController.signup);
 
 /**
- * Login route
+ * Signin route
  * /api/v1/auth/login
  */
-router.post("/login", UserController.login);
-
+router.post("/signin", UserController.signin);
 
 /**
- * Login route
+ * Users route
  * /api/v1/auth/users
  */
-router.get("/users", UserController.users);
-
+// router.get("/users", UserController.users);
 
 module.exports = router;
